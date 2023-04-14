@@ -1,7 +1,33 @@
 import './styles.scss';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import CardPoke from './CardPoke';
+
+interface PokeProps {
+  name: string
+  image: string
+}
 
 // API pokemon : https://pokebuildapi.fr/api/v1
 function Exo4() {
+  const [pokemons, setPokemons] = useState<PokeProps[]>([]);
+
+  const getPokemon = async () => {
+    try {
+      const response = await axios.get('https://pokebuildapi.fr/api/v1/pokemon/limit/10');
+      if (response.status !== 200) {
+        throw new Error();
+      }
+
+      setPokemons(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => { getPokemon(); }, []);
+
   return (
     <div className="exercice">
       <h2>
@@ -19,6 +45,9 @@ function Exo4() {
           <button className="button" type="submit">Envoyer</button>
         </label>
       </form>
+      <div className="pokedex">
+        {pokemons.map((pokemon) => <CardPoke key={pokemon.name} pokemon={pokemon} />)}
+      </div>
     </div>
   );
 }

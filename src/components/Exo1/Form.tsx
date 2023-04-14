@@ -5,7 +5,6 @@ interface HandleProps {
 function Form({ inputExo1, setInputExo1 }: HandleProps) {
   const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-
     setInputExo1(newValue);
   };
   return (

@@ -8,3 +8,14 @@ body {
 .red {
   color: #F00;
 }
+
+.nuit {
+  background-color: #000;
+  color: #fff;
+}
+
+.pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
