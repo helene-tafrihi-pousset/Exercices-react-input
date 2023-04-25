@@ -4,10 +4,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
+interface HandlePokeTypeInterface {
+  name: string
+  image: string
+}
+
 interface CardProps {
   pokemon: {
     name: string
     image: string
+    apiTypes: HandlePokeTypeInterface[]
   }
 
 }
@@ -30,6 +36,20 @@ function CardPoke({ pokemon }: CardProps) {
             This is the pokemon
             {' '}
             {pokemon.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {
+              pokemon.apiTypes.map((type) => (
+                <span key={type.image}>
+                  <span>{type.name}</span>
+                  <img
+                    src={type.image}
+                    alt={type.name}
+                    className="type-pokemon"
+                  />
+                </span>
+              ))
+            }
           </Typography>
         </CardContent>
       </CardActionArea>
